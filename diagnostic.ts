@@ -23,6 +23,9 @@ function filterStudentsByScore(
   cond_operator: COND_OPERATORS,
   cond_value: number,
 ): Student[] {
+  if (students.length == 0) {
+    throw new Error("The students list is empty.");
+  }
   return students.filter((student) => {
     switch (cond_operator) {
       case COND_OPERATORS.EQUALS:
@@ -51,6 +54,8 @@ async function main() {
       80,
     );
     console.log("Students with scores greater than 80:", filteredStudents);
+
+    filterStudentsByScore([], COND_OPERATORS.GREATER_THAN, 80);
   } catch (error) {
     console.error("Error filtering students:", error);
   }
